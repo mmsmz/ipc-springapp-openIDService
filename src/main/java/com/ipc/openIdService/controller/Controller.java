@@ -25,6 +25,6 @@ public class Controller {
       RedirectAttributes attributes) {
         //attributes.addFlashAttribute("flashAttribute", "redirectWithRedirectView");
         //attributes.addAttribute("attribute", "redirectWithRedirectView");
-        return new RedirectView("fazith");
+        return new RedirectView("http://localhost:8090/fazith#");
     }
 }
