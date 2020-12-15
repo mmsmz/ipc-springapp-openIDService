@@ -1,0 +1,19 @@
+#security.oauth2.client.registration.google.client-id=148705405596-0he83pp2jft8udjth6ba634ppljltll5.apps.googleusercontent.com
+#security.oauth2.client.registration.google.client-secret= YYT2erbkFQTgR_5qkr14uGDV
+
+server:
+  port: 8096
+
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: 148705405596-0he83pp2jft8udjth6ba634ppljltll5.apps.googleusercontent.com
+            client-secret: YYT2erbkFQTgR_5qkr14uGDV
+
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/ipcdb_product
+    username: root
