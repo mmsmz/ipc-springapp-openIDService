@@ -22,11 +22,11 @@ public class Controller {
 
     }
     
-    @GetMapping("/redirectWithRedirectView")
+    @GetMapping("/loginwithgoogle")
     public RedirectView redirectWithUsingRedirectView(
       RedirectAttributes attributes) {
         //attributes.addFlashAttribute("flashAttribute", "redirectWithRedirectView");
         //attributes.addAttribute("attribute", "redirectWithRedirectView");
-        return new RedirectView("http://localhost:8090/fazith#");
+        return new RedirectView("http://localhost:4200/contact-us");
     }
 }
