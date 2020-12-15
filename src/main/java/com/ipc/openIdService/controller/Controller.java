@@ -1,5 +1,7 @@
 package com.ipc.openIdService.controller;
 
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -15,8 +17,8 @@ public class Controller {
     }
 
     @GetMapping("/restricted")
-    public String restricted(){
-        return "to see this text you need to be logged in!!";
+    public String restricted(@AuthenticationPrincipal OAuth2User principal){
+        return principal.getAttribute("email").toString();
 
     }
     
