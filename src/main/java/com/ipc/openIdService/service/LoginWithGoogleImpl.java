@@ -24,7 +24,7 @@ public class LoginWithGoogleImpl implements LoginWithGoogle{
     public String loginWithGoogle(String email) {
         List<UserEntity> userEntityList = userRepository.findByEmail(email);
         if (userEntityList.isEmpty()) {
-            return "http://localhost:4200/home?email="+email; // add params ?email userid
+            return "http://localhost:4200/google/registration?email="+email; // add params ?email userid
         }
         else{
             return "http://localhost:4200/contact-us";
@@ -34,8 +34,9 @@ public class LoginWithGoogleImpl implements LoginWithGoogle{
     @Override
     public String getUserId(String email) {
 
-        UserEntity userNameEntity = userRepository.findByUserId(email);
-        return userNameEntity.getUserId();
+        List<UserEntity> userNameEntity = userRepository.findByEmail(email);
+
+        return userNameEntity.get(0).getUserId();
 
     }
 }

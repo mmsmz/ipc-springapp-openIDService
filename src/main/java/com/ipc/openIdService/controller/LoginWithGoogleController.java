@@ -14,7 +14,11 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
+import javax.servlet.http.HttpServletResponse;
+import javax.sound.sampled.Control;
+
 @RestController
+@CrossOrigin(originPatterns = "/**")
 @RequestMapping("oIService")
 public class LoginWithGoogleController {
 
@@ -26,30 +30,40 @@ public class LoginWithGoogleController {
     @Autowired
     LoginWithGoogle loginWithGoogle;
 
-    @GetMapping("/")
+//    @CrossOrigin
+
+    @CrossOrigin(origins="*", maxAge=3600)
+    @GetMapping("/hello")
     public String helloWorld(){
         return "Hello World";
     }
 
 
-    @GetMapping("/restricted")
+    @RequestMapping(value = "/restricted", method = RequestMethod.GET)
     public String restricted(@AuthenticationPrincipal OAuth2User principal){
         return principal.getAttribute("email").toString();
     }
     
     @GetMapping("/loginWithGoogle")
-    public RedirectView loginWithGoogle(RedirectAttributes attributes, @AuthenticationPrincipal OAuth2User principal) {
+    public RedirectView loginWithGoogle(RedirectAttributes attributes, @AuthenticationPrincipal OAuth2User principal, HttpServletResponse response ) {
         //attributes.addFlashAttribute("flashAttribute", "redirectWithRedirectView");
         //attributes.addAttribute("attribute", "redirectWithRedirectView");
 
         String email = principal.getAttribute("email").toString();
         String urlpath = loginWithGoogle.loginWithGoogle(email);
 
+        // header key : Access-Control-Allow-Origin = "*"
+        // header key : Access-Control-Allow-Headers = "Origin, X-Requested-With, Content-Type, Accept"
+//        response.addHeader("Access-Control-Allow-Origin", "*" );
+//        response.addHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+
+
         return new RedirectView(urlpath);
     }
 
 
     // GET: getuserid API (@RequestParam String email) return userId
+    @CrossOrigin(origins="*", maxAge=3600)
     @GetMapping(value = "/getUserId", produces = "application/json")
     public ResponseEntity<ResponseDto> getUserId(@RequestParam String email) {
         logger.info("Inside the Get User Id method Start");

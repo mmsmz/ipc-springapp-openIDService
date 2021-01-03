@@ -12,6 +12,8 @@ spring:
           google:
             client-id: 148705405596-0he83pp2jft8udjth6ba634ppljltll5.apps.googleusercontent.com
             client-secret: YYT2erbkFQTgR_5qkr14uGDV
+            security.oauth2.client.authorized-grant-types: authorization_code,refresh_token,password
+            security.oauth2.client.scope: openid
 
 
   datasource:
